@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFrAjQBac30tft4PlVT4fosRhvyjSNbOY&libraries=places"
+        async defer></script>
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+    <script type="module" src="https://unpkg.com/@googlemaps/extended-component-library@0.6"></script>
+    <div id="form" class="center">
+        <h1>Forecatrip</h1>
+        <p id="websiteDescription">Enter the city name, target date, and intended audience for the activity.<br> The site will provide a weather forecast, tailored activity recommendations,<br> guidance on appropriate gear, and even ideas for suitable food for the activity.</p><br>
+        <form id="myForm" class="form-container">
+            <div class="form-field">
+                <input type="date" id="date" required>
+            </div>
+            <div class="form-field">
+                <input type="text" id="participants" placeholder="who participates" required>
+            </div>
+            <div>
+                <gmpx-api-loader key="AIzaSyDFrAjQBac30tft4PlVT4fosRhvyjSNbOY"
+                    solution-channel="GMP_CCS_autocomplete_v4">
+                </gmpx-api-loader>
+                <gmp-map id="map" center="40.749933,-73.98633" zoom="13">
+                    <div slot="control-block-start-inline-start" class="pac-card" id="pac-card">
+                        <gmpx-place-picker id="place-picker" for-map="map" type="(cities)" placeholder="location"></gmpx-place-picker>
+                    </div>
+                    <gmp-advanced-marker id="marker"></gmp-advanced-marker>
+                </gmp-map>
+                <div id="infowindow-content">
+                    <span id="place-name" class="title" style="font-weight: bold;"></span><br />
+                    <span id="place-address"></span>
+                </div>
+            </div>
+            <button type="submit" id="submitButton">Submit</button>
+        </form>
+    </div>
+    <button id="return" onclick="returnToForm()">return</button>
+    <div id="output">
+        <div id="weather-container">
+            <h2 id="title">Details About The Activity</h2>
+            <p id="weather-description"></p>
+            <h3 id="Activity">Suggested Activity</h3>
+            <p id="activity-suggestion"></p>
+            <h3 id="Attire">Suggested Attire</h3>
+            <p id="attire-suggestion"></p>
+            <h3 id="Food">Suggested Food</h3>
+            <p id="food-suggestion"></p>
+            <button id="hebrew" onclick="changeToHebrew()">עברית</button>
+            <button id="english" onclick="changeToEnglish()">English</button>
+        </div>
+
+    </div>
+    <script src="index.js"></script>
+</body>
+
+</html>
